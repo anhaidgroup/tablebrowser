@@ -1,5 +1,5 @@
 <div class="section" id="user-manual">
-<span id="user"></span><h1>User Manual<a class="headerlink" href="#user-manual" title="Permalink to this headline">¶</a></h1>
+<span id="user"></span><h1>User Manual<a class="headerlink" href="#user-manual" title="Permalink to this headline"></a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
 <p>Cloud browser is a tool for easy visualization of large csv files. This tool allows you to upload csv files and view
