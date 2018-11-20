@@ -7,7 +7,7 @@ Developer Manual
 Overview
 ========
 
-This projected is created using Django python for the backend. The Django ORM maps to a Sqlite database. Leaflet JS is
+This project is created using Django python for the backend. The Django ORM maps to a Sqlite database. Leaflet JS is
 used to create the front end for a map view. Pandas is used to read csv files into memory and convert them to html and
 the wkhtmltopdf package is used to convert html strings into images.
 
