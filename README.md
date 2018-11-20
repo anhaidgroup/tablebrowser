@@ -1,7 +1,7 @@
 <div class="section" id="user-manual">
 <span id="user"></span><h1>User Manual<a class="headerlink" href="#user-manual" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
 <p>Cloud browser is a tool for easy visualization of large csv files. This tool allows you to upload csv files and view
 them as a map i.e. perform pan and zoom operations through UI. Cloud browser processes csv files on the fly and has a
 low latency for initial loading and browsing as compared to traditional tools such as Apple Numbers and Microsoft Excel.
@@ -9,14 +9,14 @@ It is available as a micro-cloud service, hence can be hosted in one place and t
 any requirements or dependencies other than a web browser.</p>
 </div>
 <div class="section" id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h2>
 <p>Cloud browser is configured to use a maximum of 30 GB of disk space. This tool has been tested for the linux
 environment. In order to set up cloud browser on a host, a python 3 environment will be required which could be native,
 virtual or a container. Python pip is required for installing dependencies. Wkhtmltopdf package needs to be installed on
 the machine. Write permissions are required on the ‘media’ folder where temporary data will be stored.</p>
 </div>
 <div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li>First get account credentials for an ec2 Linux machine and set a security policy that will allow access to port 80 of</li>
 </ul>
@@ -66,7 +66,7 @@ the machine. Write permissions are required on the ‘media’ folder where temp
 </ul>
 </div>
 <div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
 <p>This tool is pretty straight forward to use. The index page opens up a file manager portal where you can upload a csv
 file, choose to browse one of the csv files already uploaded, delete a file or download a file. Clicking on the csv file
 will open the file in a map window where you can use pan and zoom operations to browse it. A slider is available to the
