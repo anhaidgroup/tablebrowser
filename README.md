@@ -17,7 +17,7 @@ the machine. Write permissions are required on the ‘media’ folder where temp
 </div>
 <div class="section" id="installation-on-docker">
 <h2>Installation on Docker<a class="headerlink" href="#installation-on-docker" title="Permalink to this headline"></a></h2>
-<p>Docker Image can be found on docker hub at kaushikc92/magicktable:v5</p>
+<p>Docker Image can be found on docker hub at https://hub.docker.com/r/kaushikc92/magicktable</p>
 <ul class="simple">
 <li>First get account credentials for an ec2 Linux machine and set a security policy that will allow access to port 80 of</li>
 </ul>
@@ -34,8 +34,8 @@ the machine. Write permissions are required on the ‘media’ folder where temp
 </pre></div>
 </div>
 </li>
-<li><p class="first">Run the docker container with the image found at kaushikc92/cloud_browser:v1</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8000</span><span class="p">:</span><span class="mi">8000</span> <span class="n">kaushikc92</span><span class="o">/</span><span class="n">cloud_browser</span><span class="p">:</span><span class="n">v1</span>
+<li><p class="first">Run the docker container with the image found at kaushikc92/magicktable:v5</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8000</span><span class="p">:</span><span class="mi">8000</span> <span class="n">kaushikc92</span><span class="o">/</span><span class="n">magicktable</span><span class="p">:</span><span class="n">v5</span>
 </pre></div>
 </div>
 </li>
