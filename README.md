@@ -17,7 +17,7 @@ the machine. Write permissions are required on the ‘media’ folder where temp
 </div>
 <div class="section" id="installation-on-docker">
 <h2>Installation on Docker<a class="headerlink" href="#installation-on-docker" title="Permalink to this headline"></a></h2>
-<p>Docker Image can be found on docker hub at kaushikc92/cloud_browser:v1</p>
+<p>Docker Image can be found on docker hub at kaushikc92/magicktable:v5</p>
 <ul class="simple">
 <li>First get account credentials for an ec2 Linux machine and set a security policy that will allow access to port 80 of</li>
 </ul>
