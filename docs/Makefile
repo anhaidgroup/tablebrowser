@@ -6,7 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 SPHINXPROJ    = cloud_browser
 SOURCEDIR     = .
-BUILDDIR      = _build
+BUILDDIR      = ../../tablebrowser-docs
 
 # Put it first so that "make" without argument is like "make help".
 help:
