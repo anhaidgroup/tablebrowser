@@ -1,4 +1,5 @@
 <div class="section" id="user-manual">
+<span id="user"></span><h1>User Manual<a class="headerlink" href="#user-manual" title="Permalink to this headline"></a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
 <p>Cloud browser is a tool for easy visualization of large csv files. This tool allows you to upload csv files and view
@@ -7,24 +8,37 @@ low latency for initial loading and browsing as compared to traditional tools su
 It is available as a micro-cloud service, hence can be hosted in one place and then the users do not need to worry about
 any requirements or dependencies other than a web browser.</p>
 </div>
-<div class="section" id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h2>
-<p>Cloud browser is configured to use a maximum of 30 GB of disk space. This tool has been tested for the linux
-environment. In order to set up cloud browser on a host, a python 3 environment will be required which could be native,
-virtual or a container. Python pip is required for installing dependencies. Wkhtmltopdf package needs to be installed on
-the machine. Write permissions are required on the ‘media’ folder where temporary data will be stored.</p>
+<div class="section" id="requirements-summary">
+<h2>Requirements Summary<a class="headerlink" href="#requirements-summary" title="Permalink to this headline"></a></h2>
+<p>Cloud browser is configured to use a maximum of 30 GB of disk space. This tool has been tested on Ubuntu 16.04 but
+should be compatible with other versions. In order to set up cloud browser on a host, a python 3.5.0 or newer environment
+will be required which could be native, virtual or a container. Python pip is required for installing dependencies.
+Wkhtmltopdf 0.12.3 package needs to be installed on the machine. Write permissions are required on the ‘media’ folder
+where temporary data will be stored.</p>
 </div>
-<div class="section" id="installation-on-docker">
-<h2>Installation on Docker<a class="headerlink" href="#installation-on-docker" title="Permalink to this headline"></a></h2>
-<p>Docker Image can be found on docker hub at https://hub.docker.com/r/kaushikc92/magicktable</p>
-<ul class="simple">
-<li>First get account credentials for an ec2 Linux machine and set a security policy that will allow access to port 80 of</li>
-</ul>
-<p>the machine.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
 <ul>
-<li><p class="first">After ssh into the amazon box, update packages and install docker</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">update</span> <span class="o">-</span><span class="n">y</span>
-<span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">docker</span>
+<li><p class="first">Login to the ec2 console and launch an ec2 instance. We recommend using the m5.large ec2 instance with ubuntu 16.04. The application should work on other instance types but may run slower on the burstable t-series instance types.</p>
+</li>
+<li><p class="first">When you create the instance, you will get a key pair which you should save to some location on your local machine</p>
+</li>
+<li><p class="first">Go to the “Network &amp; Security” menu of your ec2 instance. Find the security group that your instance is part of. Click on “Inbound rules”. Use the dropdown and add HTTP (port 80).</p>
+</li>
+<li><p class="first">Change permissions for the private key</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">chmod</span> <span class="mi">400</span> <span class="o">/</span><span class="n">path_to_key</span><span class="o">/</span><span class="n">my_key</span><span class="o">.</span><span class="n">pem</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Note the public dns name for your ec2 instance from the ec2 instance dashboard</p>
+</li>
+<li><p class="first">SSH into your ec2 instance using the downloaded key</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">i</span> <span class="o">/</span><span class="n">path_to_key</span><span class="o">/</span><span class="n">my_key</span><span class="o">.</span><span class="n">pem</span> <span class="n">ec2</span><span class="o">-</span><span class="n">user</span><span class="nd">@public_dns_name</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Install docker</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">docker</span>
 </pre></div>
 </div>
 </li>
@@ -33,7 +47,7 @@ the machine. Write permissions are required on the ‘media’ folder where temp
 </pre></div>
 </div>
 </li>
-<li><p class="first">Run the docker container with the image found at kaushikc92/magicktable:v5</p>
+<li><p class="first">Run the docker container</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8000</span><span class="p">:</span><span class="mi">8000</span> <span class="n">kaushikc92</span><span class="o">/</span><span class="n">magicktable</span><span class="p">:</span><span class="n">v5</span>
 </pre></div>
 </div>
@@ -48,54 +62,32 @@ the machine. Write permissions are required on the ‘media’ folder where temp
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">virtual</span><span class="o">.</span><span class="n">conf</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">Add the following line to the above file inside the http object</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">client_max_body_size</span> <span class="mi">200</span><span class="n">M</span><span class="p">;</span>
+<p>with the following content (Replace #PUBLIC_DNS with the actual public dns)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>server {
+    listen  80;
+    server_name    #PUBLIC_DNS;
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_connect_timeout       600;
+        proxy_send_timeout          600;
+        proxy_read_timeout          600;
+        send_timeout                600;
+    }
+}
 </pre></div>
 </div>
 </li>
-<li><p class="first">Restart nginx to reflect new changes</p>
+<li><p class="first">Restart Nginx server</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">nginx</span> <span class="n">restart</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">You could also build your own docker image from the source code and run it in the docker container.</p>
+<li><p class="first">You can now use the tool by opening a web browser and typing the public dns name</p>
 </li>
-<li><p class="first">Another option is to clone the source code and host it elsewhere without using docker.</p>
-</li>
-</ul>
-</div>
-<div class="section" id="installation-from-source">
-<h2>Installation from source<a class="headerlink" href="#installation-from-source" title="Permalink to this headline"></a></h2>
-<ul>
-<li><p class="first">Clone the repository</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">anhaidgroup</span><span class="o">/</span><span class="n">tablebrowser</span><span class="o">.</span><span class="n">git</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">Install wkhtmtoimage</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">wkhtmltopdf</span><span class="o">/</span><span class="n">wkhtmltopdf</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="mf">0.12</span><span class="o">.</span><span class="mi">3</span><span class="o">/</span><span class="n">wkhtmltox</span><span class="o">-</span><span class="mf">0.12</span><span class="o">.</span><span class="mi">3</span><span class="n">_linux</span><span class="o">-</span><span class="n">generic</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">xz</span>
-<span class="n">tar</span> <span class="n">vxf</span> <span class="n">wkhtmltox</span><span class="o">-</span><span class="mf">0.12</span><span class="o">.</span><span class="mi">3</span><span class="n">_linux</span><span class="o">-</span><span class="n">generic</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">xz</span>
-<span class="n">cp</span> <span class="n">wkhtmltox</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">wk</span><span class="o">*</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">Install dependencies using pip</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">tablebrowser</span><span class="o">/</span><span class="n">tablebrowser</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">trusted</span><span class="o">-</span><span class="n">host</span> <span class="n">pypi</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">org</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">Initialize Django database</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
-<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">Start Django server</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
-</pre></div>
-</div>
+<li><p class="first">You can stop (or terminate) the service from the EC2 instance dashboard. Select your EC2 instance, click on “Actions” and then click on stop (or terminate)</p>
 </li>
 </ul>
 </div>
@@ -105,16 +97,5 @@ the machine. Write permissions are required on the ‘media’ folder where temp
 file, choose to browse one of the csv files already uploaded, delete a file or download a file. Clicking on the csv file
 will open the file in a map window where you can use pan and zoom operations to browse it. A slider is available to the
 right of the map window which can be used to quickly jump to any portion of a large csv file.</p>
-</div>
-<div class="section" id="rest-api">
-<h2>Rest API<a class="headerlink" href="#rest-api" title="Permalink to this headline"></a></h2>
-<p>Rest Api is available for uploading a csv file, requesting individual tiles, getting tile counts as well as  deleting files. If HOST_URL is
-the url hosting the service, the following are the REST API available</p>
-<ul class="simple">
-<li>Make POST request to HOST_URL with csv file as parameter ‘docfile’ in order to upload file</li>
-<li>Make GET request to HOST_URL/map/tilecount/?file=FILE_NAME to get total tile count</li>
-<li>Make POST request to HOST_URL/map/delete with filename as parameter ‘file_name’ to delete the file</li>
-<li>Make GET request to HOST_URL/tiler/v4/mapbox.streets/z/x/y?file=FILE_NAME to get the tile at location (x,y) and zoom level z</li>
-</ul>
 </div>
 </div>
