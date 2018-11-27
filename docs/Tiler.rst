@@ -1,4 +1,4 @@
 Tiler
 ------------------
-.. automodule:: cloud_browser.tiler.views
+.. automodule:: tablebrowser.tiler.views
     :members:
