@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 import tempfile
+import sys
 
 f = open('/etc/nginx/conf.d/virtual.conf','w')
-f.write('server {\n\tlisten  80;\n\tserver_name ec2-34-238-239-179.compute-1.amazonaws.com;\n\tlocation / {\n\t\tproxy_pass http://127.0.0.1:8000;\n\t\tproxy_set_header Host $host;\n\t\tproxy_set_header X-Real-IP $remote_addr;\n\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n\t\tproxy_connect_timeout 600;\n\t\tproxy_send_timeout 600;\n\t\tproxy_read_timeout 600;\n\t\tsend_timeout 600;\n\t}\n}')
+f.write('server {\n\tlisten  80;\n\tserver_name ' + sys.argv[1] + ';\n\tlocation / {\n\t\tproxy_pass http://127.0.0.1:8000;\n\t\tproxy_set_header Host $host;\n\t\tproxy_set_header X-Real-IP $remote_addr;\n\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n\t\tproxy_connect_timeout 600;\n\t\tproxy_send_timeout 600;\n\t\tproxy_read_timeout 600;\n\t\tsend_timeout 600;\n\t}\n}')
 f.close()
 
 t = tempfile.NamedTemporaryFile(mode="r+")
