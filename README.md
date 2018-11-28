@@ -55,7 +55,7 @@ where temporary data will be stored.</p>
 <li><p class="first">Download and run this script for setting up nginx server</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">o</span> <span class="n">nginx_settings</span><span class="o">.</span><span class="n">sh</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">anhaidgroup</span><span class="o">/</span><span class="n">tablebrowser</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">nginx_settings</span><span class="o">.</span><span class="n">sh</span>
 <span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">nginx_settings</span><span class="o">.</span><span class="n">sh</span>
-<span class="n">sudo</span> <span class="o">./</span><span class="n">nginx_settings</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">sudo</span> <span class="o">./</span><span class="n">nginx_settings</span><span class="o">.</span><span class="n">sh</span> <span class="n">public_dns_name</span>
 </pre></div>
 </div>
 </li>
