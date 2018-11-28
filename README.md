@@ -52,36 +52,10 @@ where temporary data will be stored.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Install and start nginx</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">nginx</span>
-<span class="n">sudo</span> <span class="n">service</span> <span class="n">nginx</span> <span class="n">start</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">Edit the nginx configs</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">virtual</span><span class="o">.</span><span class="n">conf</span>
-</pre></div>
-</div>
-<p>with the following content (Replace #PUBLIC_DNS with the actual public dns)</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>server {
-    listen  80;
-    server_name    #PUBLIC_DNS;
-    location / {
-        proxy_pass http://127.0.0.1:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_connect_timeout       600;
-        proxy_send_timeout          600;
-        proxy_read_timeout          600;
-        send_timeout                600;
-    }
-}
-</pre></div>
-</div>
-</li>
-<li><p class="first">Restart Nginx server</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">nginx</span> <span class="n">restart</span>
+<li><p class="first">Download and run this script for setting up nginx server</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">o</span> <span class="n">nginx_settings</span><span class="o">.</span><span class="n">sh</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">anhaidgroup</span><span class="o">/</span><span class="n">tablebrowser</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">nginx_settings</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">nginx_settings</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">sudo</span> <span class="o">./</span><span class="n">nginx_settings</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
 </li>
