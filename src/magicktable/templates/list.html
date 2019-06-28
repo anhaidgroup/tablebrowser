@@ -41,18 +41,18 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
     <script>
         function updateProgressBar() {
-            $.getJSON('/tiler/progress', function(data){
+            $.getJSON('tiler/progress', function(data){
                 $(".progress-bar").attr("aria-valuenow", data["progressValue"]).css("width", data["progressValue"] + "%"); 
                 $("#progress-text-small").text(data["progressStatus"]);
             });
         }
         function deleteFile(file_name) {
-            $.post('/map/delete', {file_name: file_name});
+            $.post('map/delete', {file_name: file_name});
             $("." + file_name.slice(0, -4) + "-list-group-item").remove();
         }
         function checkform() {
             var request = new XMLHttpRequest();
-            request.open('GET', '/fileexists', false);  // `false` makes the request synchronous
+            request.open('GET', 'fileexists', false);  // `false` makes the request synchronous
             request.send(null);
 
             if (request.status === 200) {

@@ -81,7 +81,7 @@
     
     mymap.setView(center, 13);
 
-    L.tileLayer('/tiler/v4/{id}/{z}/{x}/{y}?file={{ file }}', {
+    L.tileLayer('../../tiler/v4/{id}/{z}/{x}/{y}?file={{ file }}', {
         maxZoom: 13,
         minZoom: 9,
         id: 'mapbox.streets',
@@ -99,7 +99,7 @@
     mymap.on('click', onMapClick);
 
     function onStop() {
-        $.getJSON('/map/tilecount?file={{ file }}', function(data){
+        $.getJSON('../tilecount?file={{ file }}', function(data){
             var slide = 1000 - $("#slider").slider("value");
             var offset = 256 * (data['tilecount'] - 5) * slide / 1000;
             var lookat = mymap.unproject([map_width/2, map_height/2 + offset], 13);
