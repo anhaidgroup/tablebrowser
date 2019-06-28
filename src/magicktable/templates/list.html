@@ -81,7 +81,7 @@
         <div class="list-group">
             {% for document in documents %}
             <div class="list-group-item {{ document.file_name|slice:"0:-4" }}-list-group-item">
-                <a style="color: black;" href="/map/leaflet?file={{ document.file_name }}">{{ document.file_name }}</a>
+                <a style="color: black;" href="map/leaflet?file={{ document.file_name }}">{{ document.file_name }}</a>
                 <a style="color: red;" href="javascript: deleteFile('{{ document.file_name }}')" >
                     <span style="float: right; padding-top: 5px;" class="oi oi-x"></span>
                 </a>

@@ -24,4 +24,5 @@ RUN chmod -R 777 media
 EXPOSE 8000
 
 #CMD python manage.py makemigrations && python manage.py migrate && service nginx start && gunicorn -b 0.0.0.0:8000 magicktable.wsgi
-CMD python manage.py makemigrations && python manage.py migrate && gunicorn -b 0.0.0.0:8000 magicktable.wsgi
+#CMD python manage.py makemigrations && python manage.py migrate && gunicorn -b 0.0.0.0:8000 magicktable.wsgi
+CMD python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000

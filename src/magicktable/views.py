@@ -36,7 +36,7 @@ def list_files(request):
             newdoc = Document(file_name=request.FILES['docfile'].name, docfile=request.FILES['docfile'],
                 rows=0, columns=0)
             newdoc.save()
-            return redirect('/map/leaflet?file=' + request.FILES['docfile'].name)
+            return redirect('map/leaflet?file=' + request.FILES['docfile'].name)
     else:
         form = DocumentForm()
     documents = Document.objects.all()
