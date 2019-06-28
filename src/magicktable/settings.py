@@ -119,3 +119,5 @@ STATIC_URL = '/static/'
 # upload paths
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = "/media/"
+
+FORCE_SCRIPT_NAME = "/user/app/"

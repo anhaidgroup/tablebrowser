@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tablebrowser
+spec:
+  selector:
+    matchLabels:
+      name: tablebrowser
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: tablebrowser
+    spec:
+      containers:
+        - name: tablebrowser
+          image: "docker.io/kaushikc92/tablebrowser:latest"
+          ports:
+            - name: http
+              containerPort: 8000
