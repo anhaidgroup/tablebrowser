@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'magicktable.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join('/storage', 'db.sqlite3'),
     }
 }
 
@@ -117,7 +117,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # upload paths
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join('/storage', 'media')
 MEDIA_URL = "/media/"
 
-FORCE_SCRIPT_NAME = "/user/app/"
+FORCE_SCRIPT_NAME = "/" + os.environ['COLUMBUS_USERNAME'] + "/tablebrowser/"

@@ -14,15 +14,15 @@ RUN mkdir /code
 WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
-RUN pip install gunicorn
+#RUN pip install gunicorn
 
 COPY ./src/ /code/
 # Remove this!
-RUN chmod -R 777 media
+#RUN chmod -R 777 media
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
 
 #CMD python manage.py makemigrations && python manage.py migrate && service nginx start && gunicorn -b 0.0.0.0:8000 magicktable.wsgi
 #CMD python manage.py makemigrations && python manage.py migrate && gunicorn -b 0.0.0.0:8000 magicktable.wsgi
-CMD python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000
+CMD mkdir -p /storage/media/tiles && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000
