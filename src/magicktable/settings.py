@@ -120,4 +120,4 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join('/storage', 'media')
 MEDIA_URL = "/media/"
 
-FORCE_SCRIPT_NAME = "/" + os.environ['COLUMBUS_USERNAME'] + "/tablebrowser/"
+FORCE_SCRIPT_NAME = "/app/" + os.environ['COLUMBUS_USERNAME'] + "/tablebrowser/"
