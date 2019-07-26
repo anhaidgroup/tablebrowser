@@ -3,4 +3,5 @@ pandas
 imgkit
 pillow
 pandas_profiling
+requests
 

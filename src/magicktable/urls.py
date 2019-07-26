@@ -25,5 +25,8 @@ urlpatterns = [
                   path('fileexists/', views.file_with_same_name_exists, name='file_exists'),
                   path('map/', include('mapui.urls')),
                   path('tiler/', include('tiler.urls')),
+                  path('client-id/', views.client_id, name='client_id'),
+                  path('access-token/', views.access_token, name='access_token'),
+                  path('import-cdrive-file/', views.import_cdrive_file, name='import_cdrive_file'),
                   path('admin/', admin.site.urls),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
