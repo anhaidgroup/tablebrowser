@@ -94,67 +94,59 @@
 		return "";
 	}
 	function renderCDriveContainer() {
-		var cdriveUrl = "https://api.cdrive.columbusecosystem.com/";
-		$.ajax({
-			url: cdriveUrl + "list/",
-			beforeSend: function (xhr) {
-				xhr.setRequestHeader ("Authorization", "Bearer " + getCookie("columbus_token"));
-			},
-		})
-			.done(function ( data ) {
-				$(".cdrivediv").prepend("<div class='cdrive-import-container fileslistdiv'></div>");
-				$(".cdrive-import-container").append("<h4 style='width:100%;'>Import from CDrive</h4>");
-
-				if (data.length > 0) $(".cdrive-import-container").append("<ul class='cdrive-file-list list-group'> </ul>");
-				$.each(data, function(i, val) {
-					liHtml = "<li class='list-group-item' style='cursor: pointer;' >" + val["file_name"] + "</li>" ;
-					$(liHtml)
-						.appendTo(".cdrive-file-list")
-						.click( function() {
-							$.ajax({
-								url: cdriveUrl + "download/?file_name=" + val["file_name"] ,
-								beforeSend: function (xhr) {
-									xhr.setRequestHeader ("Authorization", "Bearer " + getCookie("columbus_token"));
-								},
-							})
-								.done(function ( data ) {
-									$.post("import-cdrive-file/", { download_url: data["download_url"], file_name: val["file_name"] })
-										.done(function ( data ) {
-											window.location.href = "map/leaflet?file=" + val["file_name"];
-										});
-                    							$("#upload-progress-bar").css("visibility", "visible");
-                    							setInterval(updateProgressBar, 500);
-								});
-						});
-				});
-				$(".cdrive-import-container").append("<a href='https://cdrive.columbusecosystem.com' class='btn btn-primary' style='width: 40%; margin-left: 30%; margin-top: 15px;'>Go to CDrive</a>");
-			});
+    var cdriveUrl = "https://api.cdrive.columbusecosystem.com/";
+    $(".cdrivediv").prepend("<div class='cdrive-import-container fileslistdiv'></div>");
+    $(".cdrive-import-container").append("<h4 style='width:100%;'>Import from CDrive</h4>");
+    $(".cdrive-import-container").append("<input type='text' id='cdrive-path'/>");
+    var importButton = "<button class='btn btn-primary' style='margin-left:10px;'> Import </button>" ;
+    $(importButton).appendTo(".cdrive-import-container").click( function(){
+        var path = $("#cdrive-path").val();
+        var tokens = path.split("/");
+        var fileName = tokens[tokens.length - 1];
+        $.ajax({
+          url: cdriveUrl + "download/?path=" + path ,
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "Bearer " + getCookie("tbrowser_token"));
+          },
+        })
+          .done(function ( data ) {
+            $.post("import-cdrive-file/", { download_url: data["download_url"], file_name: fileName })
+              .done(function ( data ) {
+                window.location.href = "map/leaflet?file=" + fileName;
+              });
+            $("#upload-progress-bar").css("visibility", "visible");
+            setInterval(updateProgressBar, 500);
+          });
+    });
+    $(".cdrive-import-container").append("<a href='https://cdrive.columbusecosystem.com' class='btn btn-secondary' style='margin-left:10px;'>Go to CDrive</a>");
 	}
 	$(function() { 
-		var urlVars = getUrlVars();
-		if (getCookie("columbus_token") !== "") renderCDriveContainer();
-		else if ("code" in urlVars) {
-			var code = urlVars["code"];
-			var url = window.location.href;
-			var redirect_uri = url.substring(0,url.indexOf("?"));
-			$.post("access-token/", { code: code, redirect_uri: redirect_uri })
-				.done(function( data ) {
-					var access_token = data["access_token"];
-					setCookie("columbus_token", access_token);
-					renderCDriveContainer();
-				});
-		} else {
-			$.getJSON("client-id/", function(data) {
-				var clientId = data["clientId"];
-				var redirect_url = window.location.href;
-				var auth_url = "https://authentication.columbusecosystem.com/o/authorize/?response_type=code&client_id=" 
-					+ clientId + "&redirect_uri=" + redirect_url + "&state=1234xyz" 	
-				$(".cdrivediv").append("<div class='cdrive-import-container'></div>");
-				$(".cdrive-import-container")
-					.append("<h4 style='width:100%;'>Import from CDrive</h4>")
-					.append("<a href='" + auth_url + "' style='margin-top:15px;' class='btn btn-primary'>Login to CDrive</a>");
-			});
-		}
+    var urlVars = getUrlVars();
+    if (getCookie("tbrowser_token") !== "") {
+      renderCDriveContainer();
+    }
+    else if ("code" in urlVars) {
+      var code = urlVars["code"];
+      var url = window.location.href;
+      var redirect_uri = url.substring(0,url.indexOf("?"));
+      $.post("access-token/", { code: code, redirect_uri: redirect_uri })
+        .done(function( data ) {
+          var access_token = data["access_token"];
+          setCookie("tbrowser_token", access_token);
+          renderCDriveContainer();
+        });
+    } else {
+      $.getJSON("client-id/", function(data) {
+        var clientId = data["clientId"];
+        var redirect_url = window.location.href;
+        var auth_url = "https://authentication.columbusecosystem.com/o/authorize/?response_type=code&client_id=" 
+                  + clientId + "&redirect_uri=" + redirect_url + "&state=1234xyz";
+        $(".cdrivediv").append("<div class='cdrive-import-container'></div>");
+        $(".cdrive-import-container")
+          .append("<h4 style='width:100%;'>Import from CDrive</h4>")
+          .append("<a href='" + auth_url + "' style='margin-top:15px;' class='btn btn-primary'>Login to CDrive</a>");
+      });
+    }
 	});
     </script>
 </head>
