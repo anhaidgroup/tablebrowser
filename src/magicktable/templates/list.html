@@ -102,12 +102,12 @@
 			},
 		})
 			.done(function ( data ) {
-				$(".cdrivediv").append("<div class='cdrive-import-container'></div>");
+				$(".cdrivediv").prepend("<div class='cdrive-import-container fileslistdiv'></div>");
 				$(".cdrive-import-container").append("<h4 style='width:100%;'>Import from CDrive</h4>");
 
-				if (data.length > 0) $(".cdrive-import-container").append("<ul class='cdrive-file-list'> </ul>");
+				if (data.length > 0) $(".cdrive-import-container").append("<ul class='cdrive-file-list list-group'> </ul>");
 				$.each(data, function(i, val) {
-					liHtml = "<li>" + val["file_name"] + "</li>" ;
+					liHtml = "<li class='list-group-item' style='cursor: pointer;' >" + val["file_name"] + "</li>" ;
 					$(liHtml)
 						.appendTo(".cdrive-file-list")
 						.click( function() {
@@ -127,6 +127,7 @@
 								});
 						});
 				});
+				$(".cdrive-import-container").append("<a href='https://cdrive.columbusecosystem.com' class='btn btn-primary' style='width: 40%; margin-left: 30%; margin-top: 15px;'>Go to CDrive</a>");
 			});
 	}
 	$(function() { 
@@ -204,6 +205,8 @@
     </div>
 </div>
 <div class="container cdrivediv">
+	<div class="formdiv">
+	</div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
